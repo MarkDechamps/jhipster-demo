@@ -1,0 +1,40 @@
+{
+  "name": "Book",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "targetRating",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "club",
+      "otherEntityRelationshipName": "books",
+      "relationshipName": "club",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "member",
+      "otherEntityRelationshipName": "books",
+      "relationshipName": "member",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20211208102143",
+  "entityTableName": "book",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["ClubManager"]
+}

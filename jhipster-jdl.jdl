@@ -1,0 +1,72 @@
+
+application {
+  config {
+    baseName ClubManager
+    applicationType monolith
+    serverPort 9001
+    authenticationType oauth2
+    buildTool maven
+    cacheProvider ehcache
+    languages	[nl, en, fr]
+    nativeLanguage nl
+    packageName be.md
+    prodDatabaseType postgresql
+    
+  }
+  entities Book, Location,Member,Club
+  
+}
+
+
+entity Book {
+	title String
+    targetRating Integer
+}
+
+
+entity Location {
+	streetAddress String,
+	postalCode String,
+	city String,
+	stateProvince String
+}
+
+ 
+entity Club {
+	title String,
+	description String,
+}
+
+entity Member {
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	inscription Instant,     
+}
+
+enum Language {
+    FRENCH, ENGLISH, SPANISH
+}
+
+
+relationship OneToOne {
+	Club{address} to Location,
+    Member{address} to Location        
+}
+
+relationship ManyToOne {
+	Member{club} to Club        
+}
+
+relationship OneToMany{
+    Club{books} to Book,
+    Member{books} to Book
+}
+
+// Set pagination options
+paginate * with infinite-scroll
+
+// Set service options to all except few
+//service all with serviceImpl 
+

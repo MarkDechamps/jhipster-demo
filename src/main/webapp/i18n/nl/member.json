@@ -1,0 +1,29 @@
+{
+  "clubManagerApp": {
+    "member": {
+      "home": {
+        "title": "Members",
+        "createLabel": "Maak een nieuwe Member",
+        "createOrEditLabel": "Maak of wijzig een Member",
+        "notFound": "No Members found"
+      },
+      "created": "A new Member is created with identifier {{ param }}",
+      "updated": "A Member is updated with identifier {{ param }}",
+      "deleted": "A Member is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Member {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Member"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "inscription": "Inscription",
+      "address": "Address",
+      "books": "Books",
+      "club": "Club"
+    }
+  }
+}

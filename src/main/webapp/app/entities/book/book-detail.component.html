@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="book">
+            <h2><span jhiTranslate="clubManagerApp.book.detail.title">Book</span> {{ book.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="clubManagerApp.book.title">Title</span></dt>
+                <dd>
+                    <span>{{ book.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.book.targetRating">Target Rating</span></dt>
+                <dd>
+                    <span>{{ book.targetRating }}</span>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.book.club">Club</span></dt>
+                <dd>
+                    <div *ngIf="book.club">
+                        <a [routerLink]="['/club', book.club?.id, 'view']">{{ book.club?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.book.member">Member</span></dt>
+                <dd>
+                    <div *ngIf="book.member">
+                        <a [routerLink]="['/member', book.member?.id, 'view']">{{ book.member?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/book', book.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

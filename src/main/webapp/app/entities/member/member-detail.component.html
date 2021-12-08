@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="member">
+            <h2><span jhiTranslate="clubManagerApp.member.detail.title">Member</span> {{ member.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="clubManagerApp.member.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{ member.firstName }}</span>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.member.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{ member.lastName }}</span>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.member.email">Email</span></dt>
+                <dd>
+                    <span>{{ member.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.member.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ member.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.member.inscription">Inscription</span></dt>
+                <dd>
+                    <span>{{ member.inscription }}</span>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.member.address">Address</span></dt>
+                <dd>
+                    <div *ngIf="member.address">
+                        <a [routerLink]="['/location', member.address?.id, 'view']">{{ member.address?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="clubManagerApp.member.club">Club</span></dt>
+                <dd>
+                    <div *ngIf="member.club">
+                        <a [routerLink]="['/club', member.club?.id, 'view']">{{ member.club?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/member', member.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

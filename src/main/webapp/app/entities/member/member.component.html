@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="clubManagerApp.member.home.title">Members</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-member" [routerLink]="['/member/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="clubManagerApp.member.home.createLabel">
+            Create a new Member
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="members?.length === 0">
+        <span jhiTranslate="clubManagerApp.member.home.notFound">No members found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="members && members.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="firstName"><span jhiTranslate="clubManagerApp.member.firstName">First Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastName"><span jhiTranslate="clubManagerApp.member.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="email"><span jhiTranslate="clubManagerApp.member.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="clubManagerApp.member.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="inscription"><span jhiTranslate="clubManagerApp.member.inscription">Inscription</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="address.id"><span jhiTranslate="clubManagerApp.member.address">Address</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="club.id"><span jhiTranslate="clubManagerApp.member.club">Club</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let member of members ;trackBy: trackId">
+                    <td><a [routerLink]="['/member', member.id, 'view']">{{ member.id }}</a></td>
+                    <td>{{ member.firstName }}</td>
+                    <td>{{ member.lastName }}</td>
+                    <td>{{ member.email }}</td>
+                    <td>{{ member.phoneNumber }}</td>
+                    <td>{{ member.inscription | date:'medium' }}</td>
+                    <td>
+                        <div *ngIf="member.address">
+                            <a [routerLink]="['/location', member.address?.id, 'view']" >{{ member.address?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="member.club">
+                            <a [routerLink]="['/club', member.club?.id, 'view']" >{{ member.club?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/member', member.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/member', member.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(member)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
